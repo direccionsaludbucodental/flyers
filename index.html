@@ -11,12 +11,27 @@
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
         .card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; padding: 15px; text-align: center; }
         
-        /* Modificamos la imagen para que muestre la 'manito' de clic y haga un pequeño zoom al pasar el mouse */
+        /* Efecto zoom al pasar el mouse por las imágenes */
         .card img { max-width: 100%; height: auto; border-radius: 5px; margin-bottom: 15px; cursor: pointer; transition: transform 0.2s; }
         .card img:hover { transform: scale(1.02); }
         
         .btn { display: inline-block; background-color: #0056b3; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; font-weight: bold; }
         .btn:hover { background-color: #004494; }
+
+        /* ESTILOS DEL FONDO (MARCA DE AGUA) */
+        .marca-de-agua {
+            background-image: url('imagenes/logo-ministerio.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 40%; /* Ajusta este valor si quieres el logo más grande o más chico */
+            opacity: 0.05; /* Transparencia muy sutil del 5% */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Mantiene el logo detrás de todo el contenido */
+        }
 
         /* ESTILOS PARA LA PANTALLA COMPLETA (MODAL) */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
@@ -25,6 +40,9 @@
     </style>
 </head>
 <body>
+
+    <!-- CAPA INVISIBLE DEL LOGO DE FONDO -->
+    <div class="marca-de-agua"></div>
 
     <header>
         <h1>Próximas Conferencias de Actualización</h1>
@@ -64,7 +82,7 @@
         <img class="modal-content" id="imgCompleta">
     </div>
 
-    <!-- SCRIPT DE JAVASCRIPT PARA HACER FUNCIONAR EL CLIC -->
+    <!-- SCRIPT PARA ABRIR Y CERRAR IMÁGENES -->
     <script>
         function abrirImagen(src) {
             document.getElementById('modalImagen').style.display = "flex";
