@@ -10,9 +10,18 @@
         h1 { color: #0056b3; }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
         .card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; padding: 15px; text-align: center; }
-        .card img { max-width: 100%; height: auto; border-radius: 5px; margin-bottom: 15px; }
+        
+        /* Modificamos la imagen para que muestre la 'manito' de clic y haga un pequeño zoom al pasar el mouse */
+        .card img { max-width: 100%; height: auto; border-radius: 5px; margin-bottom: 15px; cursor: pointer; transition: transform 0.2s; }
+        .card img:hover { transform: scale(1.02); }
+        
         .btn { display: inline-block; background-color: #0056b3; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; font-weight: bold; }
         .btn:hover { background-color: #004494; }
+
+        /* ESTILOS PARA LA PANTALLA COMPLETA (MODAL) */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
+        .modal img { max-width: 90%; max-height: 90%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+        .cerrar { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -26,7 +35,7 @@
       
        <!-- TARJETA 4: De Chiara (24/09) -->
         <div class="card">
-            <img src="imagenes/dechiara.jpg" alt="El rol de la tecnología láser en la periodoncia actual">
+            <img src="imagenes/dechiara.jpg" alt="El rol de la tecnología láser en la periodoncia actual" onclick="abrirImagen(this.src)">
             <h3>Dr. Ariel De Chiara</h3>
             <p><strong>Fecha:</strong> Jueves 24/09 - 20:00 hs.</p>
             <a href="https://meet.google.com/new-qcmi-kfm" target="_blank" class="btn">Unirse al Meet</a>
@@ -34,7 +43,7 @@
 
          <!-- TARJETA 5: Sorazabal (01/10) -->
         <div class="card">
-            <img src="imagenes/sorazabal.jpg" alt="Fluoruros: ¿Ángeles o demonios- (Parte II)">
+            <img src="imagenes/sorazabal.jpg" alt="Fluoruros: ¿Ángeles o demonios- (Parte II)" onclick="abrirImagen(this.src)">
             <h3>Dra. Ana Sorazabal</h3>
             <p><strong>Fecha:</strong> Jueves 01/10 - 20:00 hs.</p>
             <a href="https://meet.google.com/new-qcmi-kfm" target="_blank" class="btn">Unirse al Meet</a>
@@ -42,12 +51,29 @@
          
          <!-- TARJETA 6: Diaz (01/10) -->
         <div class="card">
-            <img src="imagenes/diaz.jpg" alt="COMUNICACIONES BUCOSINUSALES">
+            <img src="imagenes/diaz.jpg" alt="COMUNICACIONES BUCOSINUSALES" onclick="abrirImagen(this.src)">
             <h3>Dr. Juan Marcos Díaz</h3>
             <p><strong>Fecha:</strong> Jueves 08/10 - 20:00 hs.</p>
             <a href="https://meet.google.com/new-qcmi-kfm" target="_blank" class="btn">Unirse al Meet</a>
         </div>
     </div>
+
+    <!-- ESTRUCTURA INVISIBLE PARA LA PANTALLA COMPLETA -->
+    <div id="modalImagen" class="modal" onclick="cerrarImagen()">
+        <span class="cerrar">&times;</span>
+        <img class="modal-content" id="imgCompleta">
+    </div>
+
+    <!-- SCRIPT DE JAVASCRIPT PARA HACER FUNCIONAR EL CLIC -->
+    <script>
+        function abrirImagen(src) {
+            document.getElementById('modalImagen').style.display = "flex";
+            document.getElementById('imgCompleta').src = src;
+        }
+        function cerrarImagen() {
+            document.getElementById('modalImagen').style.display = "none";
+        }
+    </script>
 
 </body>
 </html>
